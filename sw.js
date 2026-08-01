@@ -6,7 +6,7 @@
 const CACHE = 'water-app-v1';
 const CORE = [
   './',
-  './نظام_إدارة_العمارات.html',
+  './index.html',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
