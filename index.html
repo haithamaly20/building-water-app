@@ -148,8 +148,10 @@ main{flex:1;padding:24px;max-width:1360px;width:100%;margin:0 auto}
 .comb-segs{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
 .comb-seg{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:9px;background:rgba(255,255,255,.035)}
 .comb-seg-b{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
-.comb-seg-b span{font-size:.66rem;color:var(--muted)}
-.comb-seg-b strong{font-size:.84rem;font-weight:800}
+.comb-seg-b span{font-size:.66rem;color:rgba(255,255,255,.75)}
+.comb-seg-b strong{font-size:.84rem;font-weight:800;color:#fff}
+[data-theme="light"] .comb-seg-b span{color:rgba(255,255,255,.8)}
+[data-theme="light"] .comb-seg-b strong{color:#fff}
 .tx-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;padding:16px 16px 4px}
 .tx-grid .empty{grid-column:1/-1}
 .tx-card{background:rgba(255,255,255,.035);border:1px solid var(--border);border-radius:var(--rs);padding:12px;transition:var(--tr)}
@@ -314,9 +316,9 @@ span.bt{display:none}
 <div class="g-card sec" style="margin-bottom:16px"><div class="sec-head"><h2><i class="fas fa-building" style="color:var(--warn)"></i>حساب الشقق <span class="badge" id="m-apt-cnt">0</span></h2><div class="sec-tools"><select class="filter-sel" id="m-filter" onchange="Maint.renderTable()"><option value="all">الكل</option><option value="ok">مسدد</option><option value="partial">جزئي</option><option value="no">غير مسدد</option></select><button class="btn btn-sm btn-m" onclick="Maint.addAptModal()"><i class="fas fa-plus"></i> إضافة شقة</button></div></div><div class="apt-grid" id="m-apt-body"></div><div class="apt-summary" id="m-apt-foot"></div></div>
 <div class="g-card" style="padding:18px"><h3 style="font-size:.85rem;font-weight:700;margin-bottom:12px"><i class="fas fa-screwdriver-wrench" style="color:var(--warn);margin-left:6px"></i>مستحقات الصيانة لكل شقة</h3><div id="maint-bars"></div></div>
 </div>
-<div id="pg-combined" class="page"><div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:14px"><button class="btn btn-p" onclick="Exporter.combined()"><i class="fas fa-file-pdf"></i><span class="bt"> تصدير PDF (التقرير الكلي)</span></button></div><div class="dash-grid" id="comb-dash"></div><div class="g-card sec"><div class="sec-head"><h2><i class="fas fa-layer-group" style="color:var(--water)"></i>كشف شامل <span class="badge" id="comb-cnt">0</span></h2></div><div class="apt-grid" id="comb-body"></div><div class="apt-summary" id="comb-foot"></div></div></div>
+<div id="pg-combined" class="page"><div style="display:flex;justify-content:flex-end;gap:8px;margin-bottom:14px"><button class="btn btn-p" onclick="Exporter.combined()"><i class="fas fa-file-pdf"></i><span class="bt"> تصدير PDF (التقرير الكلي)</span></button><button class="btn" onclick="Snap.cards()"><i class="fas fa-images"></i><span class="bt"> تصدير البطاقات PNG</span></button></div><div class="dash-grid" id="comb-dash"></div><div class="g-card sec"><div class="sec-head"><h2><i class="fas fa-layer-group" style="color:var(--water)"></i>كشف شامل <span class="badge" id="comb-cnt">0</span></h2></div><div class="apt-grid" id="comb-body"></div><div class="apt-summary" id="comb-foot"></div></div></div>
 <div id="pg-reports" class="page"><div class="g-card" style="padding:24px"><div id="report-content"></div></div></div>
-<div id="pg-settings" class="page"><div class="g-card" style="padding:24px;max-width:600px"><h2 style="font-size:1rem;margin-bottom:20px"><i class="fas fa-gear" style="color:var(--water);margin-left:8px"></i>إعدادات العمارة</h2><div class="fg"><label>اسم العمارة</label><input type="text" class="fc" id="s-name"></div><div class="fg"><label>العملة</label><input type="text" class="fc" id="s-currency"></div><div class="fg"><label>تسمية الشهر الحالي</label><input type="text" class="fc" id="s-period"></div><div class="fg"><label>أرقام شقق المياه (مفصولة بـ /)</label><input type="text" class="fc" id="s-water-apts" placeholder="1/3/5/6/7/8/9/10"></div><div class="fg"><label>أرقام شقق الأسانسير (مفصولة بـ /)</label><input type="text" class="fc" id="s-elev-apts" placeholder="2/3/5/6/7/8/9/10"></div><div class="fg"><label>أرقام شقق الصيانة (مفصولة بـ /)</label><input type="text" class="fc" id="s-maint-apts" placeholder="1/2/3/4/5"></div><div style="display:flex;gap:8px;margin-top:8px"><button class="btn btn-p" onclick="Settings.save()"><i class="fas fa-save"></i> حفظ</button><button class="btn btn-d" onclick="Settings.rollover()"><i class="fas fa-forward"></i> ترحيل الشهر</button></div></div><div class="g-card" style="padding:24px;max-width:600px;margin-top:16px"><h2 style="font-size:1rem;margin-bottom:6px"><i class="fas fa-table" style="color:var(--elev);margin-left:8px"></i>مزامنة جوجل شيت</h2><p style="font-size:.78rem;color:var(--muted);margin-bottom:16px">الصق رابط تطبيق الويب (Web app) الخاص بـ Apps Script بعد نشره على شيت البيانات. أي تعديل هنا يترفع تلقائياً للشيت خلال ثوانٍ، وأي تعديل مباشر في الشيت يترفع للتطبيق خلال 15 ثانية.</p><div class="fg"><label>رابط جوجل شيت (Web app URL)</label><input type="text" class="fc" id="s-sheet-url" placeholder="https://script.google.com/macros/s/xxxx/exec" dir="ltr" style="text-align:left"></div><div style="display:flex;align-items:center;gap:12px;margin-top:4px"><button class="btn btn-p" onclick="Settings.saveSheetUrl()"><i class="fas fa-link"></i> حفظ وربط</button><button class="btn" onclick="Sync.pull(false)"><i class="fas fa-rotate"></i> مزامنة الآن</button><span id="sync-ind" style="font-size:.78rem;color:var(--muted)"></span></div></div><div class="g-card" style="padding:24px;max-width:600px;margin-top:16px"><h2 style="font-size:1rem;margin-bottom:6px"><i class="fas fa-clock-rotate-left" style="color:var(--warn);margin-left:8px"></i>نسخ احتياطية تلقائية (محلية)</h2><p style="font-size:.78rem;color:var(--muted);margin-bottom:12px">بالإضافة للتصدير اليدوي، يحتفظ التطبيق بآخر 5 نسخ تلقائية من بياناتك داخل هذا المتصفح (نسخة كل ساعة كحد أقصى) كخط دفاع إضافي.</p><div id="bk-list" style="display:flex;flex-direction:column;gap:6px"></div></div><div class="g-card" style="padding:24px;max-width:600px;margin-top:16px"><h2 style="font-size:1rem;margin-bottom:6px"><i class="fas fa-mobile-screen-button" style="color:var(--ok);margin-left:8px"></i>تطبيق مثبّت (PWA)</h2><p style="font-size:.78rem;color:var(--muted);margin-bottom:12px">لو الملفات مستضافة على سيرفر (وليس مفتوحة مباشرة من جهازك)، يمكنك تثبيت النظام كتطبيق كامل يعمل حتى بدون إنترنت.</p><button class="btn btn-p" id="pwa-install-btn" style="display:none" onclick="PWA.install()"><i class="fas fa-download"></i> تثبيت كتطبيق</button><span id="pwa-status" style="font-size:.78rem;color:var(--muted)"></span></div></div>
+<div id="pg-settings" class="page"><div class="g-card" style="padding:24px;max-width:600px"><h2 style="font-size:1rem;margin-bottom:20px"><i class="fas fa-gear" style="color:var(--water);margin-left:8px"></i>إعدادات العمارة</h2><div class="fg"><label>اسم العمارة</label><input type="text" class="fc" id="s-name"></div><div class="fg"><label>العملة</label><input type="text" class="fc" id="s-currency"></div><div class="fg"><label>تسمية الشهر الحالي</label><input type="text" class="fc" id="s-period"></div><div class="fg"><label>أرقام شقق المياه (مفصولة بـ /)</label><input type="text" class="fc" id="s-water-apts" placeholder="1/3/5/6/7/8/9/10"></div><div class="fg"><label>أرقام شقق الأسانسير (مفصولة بـ /)</label><input type="text" class="fc" id="s-elev-apts" placeholder="2/3/5/6/7/8/9/10"></div><div class="fg"><label>أرقام شقق الصيانة (مفصولة بـ /)</label><input type="text" class="fc" id="s-maint-apts" placeholder="1/2/3/4/5"></div><div style="display:flex;gap:8px;margin-top:8px"><button class="btn btn-p" onclick="Settings.save()"><i class="fas fa-save"></i> حفظ</button><button class="btn btn-d" onclick="Settings.rollover()"><i class="fas fa-forward"></i> ترحيل الشهر</button></div></div><div class="g-card" style="padding:24px;max-width:600px;margin-top:16px"><h2 style="font-size:1rem;margin-bottom:6px"><i class="fas fa-table" style="color:var(--elev);margin-left:8px"></i>مزامنة جوجل شيت</h2><p style="font-size:.78rem;color:var(--muted);margin-bottom:16px">المزامنة مفعلة بشكل دائم مع جوجل شيت. أي تعديل في التطبيق يُرفع تلقائياً للشيت خلال ثوانٍ، وأي تعديل مباشر في الشيت يُنزل للتطبيق خلال 15 ثانية.</p><div style="display:flex;align-items:center;gap:12px;margin-top:4px;flex-wrap:wrap"><button class="btn" onclick="Sync.pull(false)"><i class="fas fa-rotate"></i> مزامنة الآن</button><button class="btn btn-m" onclick="if(confirm('سيتم استبدال البيانات المحلية ببيانات جوجل شيت كاملةً بدون استثناء. هل أنت متأكد؟'))Sync.forcePull()"><i class="fas fa-cloud-arrow-down"></i> استيراد إجباري من الشيت</button><span id="sync-ind" style="font-size:.78rem;color:var(--muted)"></span></div></div><div class="g-card" style="padding:24px;max-width:600px;margin-top:16px"><h2 style="font-size:1rem;margin-bottom:6px"><i class="fas fa-clock-rotate-left" style="color:var(--warn);margin-left:8px"></i>نسخ احتياطية تلقائية (محلية)</h2><p style="font-size:.78rem;color:var(--muted);margin-bottom:12px">بالإضافة للتصدير اليدوي، يحتفظ التطبيق بآخر 5 نسخ تلقائية من بياناتك داخل هذا المتصفح (نسخة كل ساعة كحد أقصى) كخط دفاع إضافي.</p><div id="bk-list" style="display:flex;flex-direction:column;gap:6px"></div></div><div class="g-card" style="padding:24px;max-width:600px;margin-top:16px"><h2 style="font-size:1rem;margin-bottom:6px"><i class="fas fa-mobile-screen-button" style="color:var(--ok);margin-left:8px"></i>تطبيق مثبّت (PWA)</h2><p style="font-size:.78rem;color:var(--muted);margin-bottom:12px">لو الملفات مستضافة على سيرفر (وليس مفتوحة مباشرة من جهازك)، يمكنك تثبيت النظام كتطبيق كامل يعمل حتى بدون إنترنت.</p><button class="btn btn-p" id="pwa-install-btn" style="display:none" onclick="PWA.install()"><i class="fas fa-download"></i> تثبيت كتطبيق</button><span id="pwa-status" style="font-size:.78rem;color:var(--muted)"></span></div></div>
 <div id="pg-log" class="page"><div class="g-card sec"><div class="sec-head"><h2><i class="fas fa-clock-rotate-left" style="color:var(--warn)"></i>سجل النشاط</h2><div class="sec-tools"><button class="btn btn-sm" onclick="Log.clear()"><i class="fas fa-trash"></i> مسح السجل</button></div></div><div id="log-list"></div></div></div>
 
 </main></div></div>
@@ -333,6 +335,10 @@ span.bt{display:none}
 </div></div>
 
 <script>
+const CONFIG = {
+  SHEET_URL: 'https://script.google.com/macros/s/AKfycbxHXX-KE61J6JvTabs65Mk0rlQxhhrBqz4qcpWS8J9VNXJ8V9NVEsCx6C0R4kzKMEp6/exec'
+};
+
 /* === أدوات === */
 const U={
   fmt(n){const d=DB.get();return Number(n).toFixed(2)+' '+(d?d.meta.currency:'جنيه')},
@@ -360,6 +366,8 @@ const U={
     if(v<-0.009)return '<strong style="color:var(--ok)">له '+U.fmt(Math.abs(v))+'</strong>';
     return '<strong style="color:var(--ok)">مسدد بالكامل</strong>';
   },
+  round5(n){return Math.round((Number(n)||0)/5)*5;},
+  fmt5(n){return U.fmt(U.round5(n));},
   bars(cid,data,col){
     const mx=Math.max(...data.map(d=>d.v),1);
     document.getElementById(cid).innerHTML=data.map(d=>'<div class="bar-row"><span class="bar-lbl">'+d.l+'</span><div class="bar-track"><div class="bar-fill" style="width:'+(d.v/mx*100).toFixed(1)+'%;background:'+col+'"></div></div><span class="bar-val">'+(d.t||d.v)+'</span></div>').join('');
@@ -395,12 +403,12 @@ const DB={
     /* شقق الصيانة تبدأ كنسخة من اتحاد شقق المياه والأسانسير، ويمكن تعديلها لاحقاً من الإعدادات */
     const mn=[...new Set([...wn,...en].map(String))];
     const ma=mn.map((x,i)=>({id:'m_'+i,number:x,previousBalance:0,duePeriod:0,totalDue:0,paidAmount:0,remaining:0,redirectTo:null}));
-    return{meta:{version:'2.1',buildingName:n,currency:cur,waterAptNumbers:wn,elevatorAptNumbers:en,maintenanceAptNumbers:mn,createdAt:new Date().toISOString(),lastBackupAt:null,sheetUrl:''},currentPeriod:{label:per,startedAt:new Date().toISOString()},water:{apartments:wa,trucks:[]},elevator:{apartments:ea,costs:[]},maintenance:{apartments:ma,items:[]},paymentsLog:[],history:[]};
+    return{meta:{version:'2.1',buildingName:n,currency:cur,waterAptNumbers:wn,elevatorAptNumbers:en,maintenanceAptNumbers:mn,createdAt:new Date().toISOString(),lastBackupAt:null,sheetUrl:CONFIG.SHEET_URL},currentPeriod:{label:per,startedAt:new Date().toISOString()},water:{apartments:wa,trucks:[]},elevator:{apartments:ea,costs:[]},maintenance:{apartments:ma,items:[]},paymentsLog:[],history:[]};
   },
   valid(d){return d&&d.meta&&Array.isArray(d.meta.waterAptNumbers)&&Array.isArray(d.meta.elevatorAptNumbers)&&d.water&&Array.isArray(d.water.apartments)&&d.elevator&&Array.isArray(d.elevator.apartments)},
   migrate(d){
     /* توافق مع بيانات محفوظة من نسخة سابقة لا تحتوي على وحدة الصيانة — تُضاف تلقائياً دون فقدان أي بيانات موجودة */
-    if(d.meta.sheetUrl===undefined)d.meta.sheetUrl='';
+    d.meta.sheetUrl=CONFIG.SHEET_URL;
     if(!d.meta.maintenanceAptNumbers)d.meta.maintenanceAptNumbers=[...new Set([...d.meta.waterAptNumbers,...d.meta.elevatorAptNumbers].map(String))];
     if(!d.maintenance||!Array.isArray(d.maintenance.apartments))d.maintenance={apartments:[],items:[]};
     if(!Array.isArray(d.maintenance.items))d.maintenance.items=[];
@@ -591,7 +599,6 @@ const Calc={
     const tot=list.reduce((s,a)=>s+a.consumption,0);
     list=tot===0?list.map(a=>({...a,percentage:1/list.length})):list.map(a=>({...a,percentage:a.consumption/tot}));
     list=list.map(a=>({...a,duePeriod:a.percentage*tc}));
-    list=this._fix(list,tc);
     return list.map(a=>({...a,totalDue:a.duePeriod+a.previousBalance,remaining:(a.duePeriod+a.previousBalance)-a.paidAmount}));
   },
   elevator(apts,tc){
@@ -599,7 +606,6 @@ const Calc={
     const p=1/apts.length;
     let list=apts.map(a=>({...a,percentage:p,duePeriod:p*tc}));
     list=this._redirect(list);
-    list=this._fix(list,tc);
     return list.map(a=>({...a,totalDue:a.duePeriod+a.previousBalance,remaining:(a.duePeriod+a.previousBalance)-a.paidAmount}));
   },
   maintenance(apts,items){
@@ -618,8 +624,7 @@ const Calc={
         due[a.redirectTo]+=due[a.id];due[a.id]=0;
       }
     });
-    /* تقريب مستحق كل شقة لأقرب 5 جنيه */
-    let list=apts.map(a=>({...a,duePeriod:Math.round(due[a.id]/5)*5}));
+    let list=apts.map(a=>({...a,duePeriod:due[a.id]}));
     return list.map(a=>({...a,totalDue:a.duePeriod+a.previousBalance,remaining:(a.duePeriod+a.previousBalance)-a.paidAmount}));
   },
   _redirect(list){
@@ -648,10 +653,10 @@ const Calc={
 const Sync={
   KL:'water_sync_last_modified',
   pushTimer:null,pushing:false,pulling:false,pollTimer:null,
-  url(){const d=DB.get();return d&&d.meta.sheetUrl?String(d.meta.sheetUrl).trim():''},
-  setUrl(u){
+  url(){return CONFIG.SHEET_URL;},
+  setUrl(){
     const d=DB.get();if(!d)return;
-    d.meta.sheetUrl=(u||'').trim();
+    d.meta.sheetUrl=CONFIG.SHEET_URL;
     DB.save(d,{skipPush:true,skipLog:true});
     localStorage.removeItem(this.KL);
     this.stop();this.start();
@@ -677,46 +682,74 @@ const Sync={
   },
   async pull(silent){
     const url=this.url();if(!url)return;
-    /* لو فيه رفع شغّال، تجاهل دورة السحب هذه فقط (آمن، هيتحاول تاني بعد 15 ثانية) بدل ما يتعارض مع بيانات لسه بتترفع */
     if(this.pulling||this.pushing)return;
     this.pulling=true;
     try{
       const res=await fetch(url);
       const remote=await res.json();
+      if(!remote)throw new Error('empty');
       const known=localStorage.getItem(this.KL);
-      if(remote&&remote.lastModified&&remote.lastModified!==known){
+      const local=DB.get();
+      /* lastModified قد لا يتحدث من سكريبت الشيت — نقارن أيضاً عدد المدفوعات وآخر id */
+      const remotePayLen=Array.isArray(remote.paymentsLog)?remote.paymentsLog.length:0;
+      const localPayLen=Array.isArray(local&&local.paymentsLog)?local.paymentsLog.length:0;
+      const remoteLastPay=remotePayLen>0?remote.paymentsLog[remotePayLen-1].id:'';
+      const localLastPay=localPayLen>0?local.paymentsLog[localPayLen-1].id:'';
+      const tsChanged=remote.lastModified&&remote.lastModified!==known;
+      const payChanged=remotePayLen!==localPayLen||remoteLastPay!==localLastPay;
+      if(tsChanged||payChanged){
         this.applyRemote(remote);
-        localStorage.setItem(this.KL,remote.lastModified);
+        if(remote.lastModified)localStorage.setItem(this.KL,remote.lastModified);
         this.status('ok');
         if(!silent)U.toast('تم تحديث البيانات من جوجل شيت','ok');
       }else this.status('ok');
     }catch(e){this.status('err')}
     this.pulling=false;
   },
+  async forcePull(){
+    const url=this.url();if(!url){U.toast('لا يوجد رابط مزامنة','err');return;}
+    if(this.pulling||this.pushing){U.toast('يوجد مزامنة جارية، انتظر لحظة','warn');return;}
+    this.pulling=true;this.status('sync');
+    try{
+      const res=await fetch(url);
+      const remote=await res.json();
+      if(remote&&(remote.water||remote.elevator||remote.maintenance)){
+        this.applyRemote(remote,true);
+        if(remote.lastModified)localStorage.setItem(this.KL,remote.lastModified);
+        this.status('ok');
+        U.toast('تم استيراد جميع البيانات من جوجل شيت بنجاح','ok');
+      }else{U.toast('الشيت لا يحتوي بيانات قابلة للاستيراد','warn');this.status('err');}
+    }catch(e){U.toast('تعذّر الاتصال بجوجل شيت','err');this.status('err');}
+    this.pulling=false;
+  },
   _recalc(a){a.totalDue=(Number(a.duePeriod)||0)+(Number(a.previousBalance)||0);a.remaining=a.totalDue-(Number(a.paidAmount)||0);return a},
-  applyRemote(r){
+  applyRemote(r,force=false){
     const d=DB.get();if(!d)return;
-    d.meta.buildingName=r.meta.buildingName||d.meta.buildingName;
-    d.meta.currency=r.meta.currency||d.meta.currency;
-    d.meta.waterAptNumbers=r.meta.waterAptNumbers&&r.meta.waterAptNumbers.length?r.meta.waterAptNumbers:d.meta.waterAptNumbers;
-    d.meta.elevatorAptNumbers=r.meta.elevatorAptNumbers&&r.meta.elevatorAptNumbers.length?r.meta.elevatorAptNumbers:d.meta.elevatorAptNumbers;
-    d.meta.maintenanceAptNumbers=r.meta.maintenanceAptNumbers&&r.meta.maintenanceAptNumbers.length?r.meta.maintenanceAptNumbers:d.meta.maintenanceAptNumbers;
+    if(r.meta){
+      d.meta.buildingName=r.meta.buildingName||d.meta.buildingName;
+      d.meta.currency=r.meta.currency||d.meta.currency;
+      /* في الاستيراد الإجباري نقبل أي مصفوفة حتى لو فارغة؛ في المزامنة التلقائية نرفض الفارغة فقط */
+      if(Array.isArray(r.meta.waterAptNumbers)&&(force||r.meta.waterAptNumbers.length))d.meta.waterAptNumbers=r.meta.waterAptNumbers;
+      if(Array.isArray(r.meta.elevatorAptNumbers)&&(force||r.meta.elevatorAptNumbers.length))d.meta.elevatorAptNumbers=r.meta.elevatorAptNumbers;
+      if(Array.isArray(r.meta.maintenanceAptNumbers)&&(force||r.meta.maintenanceAptNumbers.length))d.meta.maintenanceAptNumbers=r.meta.maintenanceAptNumbers;
+    }
     if(r.currentPeriod&&r.currentPeriod.label)d.currentPeriod=r.currentPeriod;
     if(r.water){
-      if(Array.isArray(r.water.apartments)&&r.water.apartments.length)d.water.apartments=r.water.apartments.map(a=>this._recalc({...a}));
+      /* في الاستيراد الإجباري نقبل أي مصفوفة بدون اشتراط الطول حتى لا نحجب شقق أقل عدداً */
+      if(Array.isArray(r.water.apartments)&&(force||r.water.apartments.length))d.water.apartments=r.water.apartments.map(a=>this._recalc({...a}));
       if(Array.isArray(r.water.trucks))d.water.trucks=r.water.trucks;
     }
     if(r.elevator){
-      if(Array.isArray(r.elevator.apartments)&&r.elevator.apartments.length)d.elevator.apartments=r.elevator.apartments.map(a=>this._recalc({...a}));
+      if(Array.isArray(r.elevator.apartments)&&(force||r.elevator.apartments.length))d.elevator.apartments=r.elevator.apartments.map(a=>this._recalc({...a}));
       if(Array.isArray(r.elevator.costs))d.elevator.costs=r.elevator.costs;
     }
     if(r.maintenance){
-      if(Array.isArray(r.maintenance.apartments)&&r.maintenance.apartments.length)d.maintenance.apartments=r.maintenance.apartments.map(a=>this._recalc({...a}));
+      if(Array.isArray(r.maintenance.apartments)&&(force||r.maintenance.apartments.length))d.maintenance.apartments=r.maintenance.apartments.map(a=>this._recalc({...a}));
       if(Array.isArray(r.maintenance.items))d.maintenance.items=r.maintenance.items;
     }
     if(Array.isArray(r.paymentsLog))d.paymentsLog=r.paymentsLog;
     DB.save(d,{skipPush:true,skipLog:true});
-    if(typeof Log!=='undefined')Log.note('⇅ تحديث تلقائي من جوجل شيت');
+    if(typeof Log!=='undefined')Log.note(force?'⇅ استيراد إجباري من جوجل شيت':'⇅ تحديث تلقائي من جوجل شيت');
     App.renderAll();
   },
   status(s){
@@ -873,7 +906,7 @@ const Water={
         +'<div class="apt-fields"><div><label>قراءة سابقة</label><input type="number" class="ti" value="'+a.previousReading+'" min="0" data-r="'+i+'" data-c="1" onblur="Water.updateReading(\''+a.id+'\',\'previous\',this.value)"></div><div><label>قراءة حالية</label><input type="number" class="ti" value="'+a.currentReading+'" min="0" data-r="'+i+'" data-c="2" onblur="Water.updateReading(\''+a.id+'\',\'current\',this.value)"></div></div>'
         +'<div class="cons-bar" style="margin-bottom:10px"><div class="cons-fill" style="width:'+(a.consumption/mx*100).toFixed(1)+'%"></div><span>'+a.consumption+' م³</span></div>'
         +'<div class="apt-stats"><div><span class="k">النسبة</span><span class="v">'+(a.totalDue>0||a.consumption>0?(a.percentage*100).toFixed(1)+'%':'—')+'</span></div><div><span class="k">مستحق الشهر</span><span class="v">'+(a.duePeriod>0?U.fmt(a.duePeriod):'—')+'</span></div><div><span class="k">رصيد سابق</span><span class="v" style="color:'+(a.previousBalance>0?'var(--err)':a.previousBalance<0?'var(--ok)':'var(--fg2)')+'">'+U.fmt(a.previousBalance)+'</span></div><div><span class="k">الإجمالي</span><span class="v" style="font-weight:800">'+U.fmt(a.totalDue)+'</span></div></div>'
-        +'<div class="apt-card-foot"><div class="apt-rem"><span>المدفوع <strong style="color:var(--ok)">'+U.fmt(a.paidAmount)+'</strong></span>'+U.netStatus(a.remaining)+Pool.badge(a.number)+'</div><div class="apt-actions"><button class="pay-i" onclick="Water.payModal(\''+a.id+'\')" title="دفع"><i class="fas fa-money-bill"></i></button><button class="btn btn-sm btn-ic" title="تعديل رصيد" onclick="Bal.open(\'water\',\''+a.id+'\')"><i class="fas fa-wallet"></i></button><button class="btn btn-sm btn-ic btn-d" onclick="Water.delApt(\''+a.id+'\')"><i class="fas fa-trash"></i></button></div></div>'
+        +'<div class="apt-card-foot"><div class="apt-rem"><span>المدفوع <strong style="color:var(--ok)">'+U.fmt(a.paidAmount)+'</strong></span>'+U.netStatus(a.remaining)+Pool.badge(a.number)+'</div><div class="apt-actions"><button class="btn btn-sm btn-ic btn-d" onclick="Water.delApt(\''+a.id+'\')"><i class="fas fa-trash"></i></button></div></div>'
         +'</div>';
     }).filter(Boolean).join('');
     const tc=d.water.apartments.reduce((s,a)=>s+a.consumption,0),tdp=d.water.apartments.reduce((s,a)=>s+a.duePeriod,0),tpb=d.water.apartments.reduce((s,a)=>s+a.previousBalance,0),ttd=d.water.apartments.reduce((s,a)=>s+a.totalDue,0),tpd2=d.water.apartments.reduce((s,a)=>s+a.paidAmount,0),trm=d.water.apartments.reduce((s,a)=>s+a.remaining,0),ttc=this.tc(),ok=Math.abs(tdp-ttc)<.01;
@@ -987,7 +1020,7 @@ const Elev={
         +'<div class="apt-card-h"><input type="text" class="ti ns" value="'+a.number+'" onblur="Elev.updateNum(\''+a.id+'\',this.value)">'+(rc?'<span class="apt-badge '+rc+'">'+st+'</span>':'')+'</div>'
         +'<div class="apt-fields"><div><label>مستحق الشهر</label><input type="number" class="ti" value="'+a.duePeriod+'" step="1" onblur="Elev.updateDue(\''+a.id+'\',this.value)"></div><div><label>توجيه المستحق</label><select class="filter-sel" style="width:100%" onchange="Elev.setRedirect(\''+a.id+'\',this.value)" title="توجيه مستحق هذه الشقة بالكامل لشقة أخرى">'+opts+'</select></div></div>'
         +'<div class="apt-stats"><div><span class="k">النسبة</span><span class="v">'+(a.totalDue>0?(a.percentage*100).toFixed(1)+'%':'—')+'</span></div><div><span class="k">رصيد سابق</span><span class="v" style="color:'+(a.previousBalance>0?'var(--err)':a.previousBalance<0?'var(--ok)':'var(--fg2)')+'">'+U.fmt(a.previousBalance)+'</span></div><div><span class="k">الإجمالي</span><span class="v" style="font-weight:800">'+U.fmt(a.totalDue)+'</span></div><div><span class="k">المدفوع</span><span class="v" style="color:var(--ok)">'+U.fmt(a.paidAmount)+'</span></div></div>'
-        +'<div class="apt-card-foot"><div class="apt-rem">'+U.netStatus(a.remaining)+Pool.badge(a.number)+'</div><div class="apt-actions"><button class="pay-i" style="border-color:var(--elev);color:var(--elev);background:var(--elev-d)" onclick="Elev.payModal(\''+a.id+'\')" title="دفع"><i class="fas fa-money-bill"></i></button><button class="btn btn-sm btn-ic" title="تعديل رصيد" onclick="Bal.open(\'elevator\',\''+a.id+'\')"><i class="fas fa-wallet"></i></button><button class="btn btn-sm btn-ic btn-d" onclick="Elev.delApt(\''+a.id+'\')"><i class="fas fa-trash"></i></button></div></div>'
+        +'<div class="apt-card-foot"><div class="apt-rem">'+U.netStatus(a.remaining)+Pool.badge(a.number)+'</div><div class="apt-actions"><button class="btn btn-sm btn-ic btn-d" onclick="Elev.delApt(\''+a.id+'\')"><i class="fas fa-trash"></i></button></div></div>'
         +'</div>';
     }).filter(Boolean).join('');
     const tdp=d.elevator.apartments.reduce((s,a)=>s+a.duePeriod,0),tpb=d.elevator.apartments.reduce((s,a)=>s+a.previousBalance,0),ttd=d.elevator.apartments.reduce((s,a)=>s+a.totalDue,0),tpd2=d.elevator.apartments.reduce((s,a)=>s+a.paidAmount,0),trm=d.elevator.apartments.reduce((s,a)=>s+a.remaining,0),ttc=this.tc(),ok=Math.abs(tdp-ttc)<.01;
@@ -1120,7 +1153,7 @@ const Maint={
         +'<div class="apt-card-h"><input type="text" class="ti ns" value="'+a.number+'" onblur="Maint.updateNum(\''+a.id+'\',this.value)">'+(rc?'<span class="apt-badge '+rc+'">'+st+'</span>':'')+'</div>'
         +'<div class="apt-fields"><div><label>مستحق الشهر</label><input type="number" class="ti" value="'+(a.duePeriod||0)+'" step="1" onblur="Maint.updateDue(\''+a.id+'\',this.value)"></div><div><label>توجيه المستحق</label><select class="filter-sel" style="width:100%" onchange="Maint.setRedirect(\''+a.id+'\',this.value)" title="توجيه مستحق هذه الشقة بالكامل لشقة أخرى">'+opts+'</select></div></div>'
         +'<div class="apt-stats"><div><span class="k">عدد البنود</span><span class="v">'+itc+' بند</span></div><div><span class="k">رصيد سابق</span><span class="v" style="color:'+(a.previousBalance>0?'var(--err)':a.previousBalance<0?'var(--ok)':'var(--fg2)')+'">'+U.fmt(a.previousBalance)+'</span></div><div><span class="k">الإجمالي</span><span class="v" style="font-weight:800">'+U.fmt(a.totalDue)+'</span></div><div><span class="k">المدفوع</span><span class="v" style="color:var(--ok)">'+U.fmt(a.paidAmount)+'</span></div></div>'
-        +'<div class="apt-card-foot"><div class="apt-rem">'+U.netStatus(a.remaining)+Pool.badge(a.number)+'</div><div class="apt-actions"><button class="pay-i" style="border-color:var(--warn);color:var(--warn);background:var(--warn-d)" onclick="Maint.payModal(\''+a.id+'\')" title="دفع"><i class="fas fa-money-bill"></i></button><button class="btn btn-sm btn-ic" title="تعديل رصيد" onclick="Bal.open(\'maintenance\',\''+a.id+'\')"><i class="fas fa-wallet"></i></button><button class="btn btn-sm btn-ic btn-d" onclick="Maint.delApt(\''+a.id+'\')"><i class="fas fa-trash"></i></button></div></div>'
+        +'<div class="apt-card-foot"><div class="apt-rem">'+U.netStatus(a.remaining)+Pool.badge(a.number)+'</div><div class="apt-actions"><button class="btn btn-sm btn-ic btn-d" onclick="Maint.delApt(\''+a.id+'\')"><i class="fas fa-trash"></i></button></div></div>'
         +'</div>';
     }).filter(Boolean).join('');
     const tdp=d.maintenance.apartments.reduce((s,a)=>s+a.duePeriod,0),tpb=d.maintenance.apartments.reduce((s,a)=>s+a.previousBalance,0),ttd=d.maintenance.apartments.reduce((s,a)=>s+a.totalDue,0),tpd2=d.maintenance.apartments.reduce((s,a)=>s+a.paidAmount,0),trm=d.maintenance.apartments.reduce((s,a)=>s+a.remaining,0);
@@ -1207,16 +1240,18 @@ const Comb={
       const eD=ea?ea.duePeriod:0,eP=ea?ea.paidAmount:0,eR=ea?ea.remaining:0;
       const mD=ma?ma.duePeriod:0,mP=ma?ma.paidAmount:0,mR=ma?ma.remaining:0;
       const tD=wD+eD+mD,tP=wP+eP+mP,tR=wR+eR+mR;
-      let rc='',st='—';if(tD>0){if(tR<=0){rc='r-ok';st='مسدد'}else if(tP>0){rc='r-warn';st='جزئي'}else{rc='r-err';st='غير مسدد'}}
-      const seg=(exists,cls,dvar,icon,color,label,due,rem,payFn)=>exists?('<div class="comb-seg" style="background:'+dvar+'"><i class="fas '+icon+'" style="color:'+color+'"></i><div class="comb-seg-b"><span>'+label+'</span><strong>'+U.fmt(due)+'</strong></div><button class="btn btn-sm btn-ic" title="دفع" onclick="'+payFn+'"><i class="fas fa-money-bill"></i></button></div>'):'';
-      return '<div class="apt-card '+rc+'">'
+      const rc=tR<=0.009?'r-ok':'r-err';const st=tR<=0.009?'مسدد':'غير مسدد';
+      const seg=(exists,dvar,icon,color,label,due,rem)=>exists?('<div class="comb-seg" style="background:'+dvar+'"><i class="fas '+icon+'" style="color:'+color+'"></i><div class="comb-seg-b" style="flex:1;min-width:0"><span>'+label+'</span><strong style="color:#fff">'+U.fmt(due)+'</strong></div></div>'):'';
+      return '<div class="apt-card '+rc+'" data-apt-num="'+num+'">'
         +'<div class="apt-card-h"><span style="font-weight:900;font-size:1.05rem">شقة '+num+'</span>'+(rc?'<span class="apt-badge '+rc+'">'+st+'</span>':'')+'</div>'
         +'<div class="comb-segs">'
-        +seg(!!wa,'','var(--water-d)','fa-droplet','var(--water)','مياه',wD,wR,wa?'Water.payModal(\''+wa.id+'\')':'')
-        +seg(!!ea,'','var(--elev-d)','fa-elevator','var(--elev)','أسانسير',eD,eR,ea?'Elev.payModal(\''+ea.id+'\')':'')
-        +seg(!!ma,'','var(--warn-d)','fa-screwdriver-wrench','var(--warn)','صيانة',mD,mR,ma?'Maint.payModal(\''+ma.id+'\')':'')
+        +seg(!!wa,'var(--water-d)','fa-droplet','var(--water)','مياه',wD,wR)
+        +seg(!!ea,'var(--elev-d)','fa-elevator','var(--elev)','أسانسير',eD,eR)
+        +seg(!!ma,'var(--warn-d)','fa-screwdriver-wrench','var(--warn)','صيانة',mD,mR)
         +'</div>'
-        +'<div class="apt-card-foot"><div class="apt-rem"><span>إجمالي مستحق '+U.fmt(tD)+' · مدفوع '+U.fmt(tP)+'</span>'+U.netStatus(tR)+'</div><div class="apt-actions"><button class="btn btn-sm" onclick="Unified.openByNumber(\''+num+'\')" title="كشف شامل"><i class="fas fa-id-card"></i></button></div></div>'
+        +'<div class="apt-card-foot"><div class="apt-rem"><span>إجمالي مستحق '+U.fmt(tD)+' · مدفوع '+U.fmt(tP)+'</span>'+U.netStatus(tR)+'</div><div class="apt-actions">'
+        +(Math.abs(tR)>0.009||tD>0?'<button class="btn btn-sm btn-p" onclick="Comb.payModal(\''+num+'\')" title="دفع"><i class="fas fa-money-bill"></i> دفع</button>':'')
+        +'<button class="btn btn-sm" onclick="Unified.openByNumber(\''+num+'\')" title="كشف شامل"><i class="fas fa-id-card"></i></button></div></div>'
         +'</div>';
     }).join('');
     const wTD=d.water.apartments.reduce((s,a)=>s+a.duePeriod,0),wTP=d.water.apartments.reduce((s,a)=>s+a.paidAmount,0),wTR=d.water.apartments.reduce((s,a)=>s+a.remaining,0);
@@ -1225,10 +1260,50 @@ const Comb={
     f.innerHTML='<div class="as-item"><span>مستحق مياه</span><span class="c-water">'+U.fmt(wTD)+'</span></div><div class="as-item"><span>مستحق أسانسير</span><span class="c-elev">'+U.fmt(eTD)+'</span></div><div class="as-item"><span>مستحق صيانة</span><span style="color:var(--warn)">'+U.fmt(mTD)+'</span></div><div class="as-item"><span>إجمالي المستحق</span><span>'+U.fmt(wTD+eTD+mTD)+'</span></div><div class="as-item"><span>إجمالي المدفوع</span><span style="color:var(--ok)">'+U.fmt(wTP+eTP+mTP)+'</span></div><div class="as-item"><span>إجمالي المتبقي</span><span style="color:'+((wTR+eTR+mTR)<=0?'var(--ok)':'var(--err)')+'">'+U.fmt(wTR+eTR+mTR)+'</span></div>';
     const gD=wTD+eTD+mTD,gP=wTP+eTP+mTP,gR=wTR+eTR+mTR,pp=gD>0?Math.min(1,gP/gD):0,rp=gD>0?Math.min(1,Math.abs(gR)/gD):0;
     document.getElementById('comb-dash').innerHTML='<div class="g-card d-card water-c">'+U.gauge(1,U.fmt(wTD),'مياه','var(--water)')+'<div class="d-info"><span class="d-label">مستحقات المياه</span><span class="d-val c-water">'+U.fmt(wTD)+'</span></div></div><div class="g-card d-card elev-c">'+U.gauge(1,U.fmt(eTD),'أسانسير','var(--elev)')+'<div class="d-info"><span class="d-label">مستحقات الأسانسير</span><span class="d-val c-elev">'+U.fmt(eTD)+'</span></div></div><div class="g-card d-card maint-c">'+U.gauge(1,U.fmt(mTD),'صيانة','var(--warn)')+'<div class="d-info"><span class="d-label">مستحقات الصيانة</span><span class="d-val" style="color:var(--warn)">'+U.fmt(mTD)+'</span></div></div><div class="g-card d-card ok-c">'+U.gauge(pp,U.fmt(gP),'محصل','var(--ok)')+'<div class="d-info"><span class="d-label">إجمالي المحصل</span><span class="d-val" style="color:var(--ok)">'+U.fmt(gP)+'</span><span class="d-sub">'+(gD>0?(pp*100).toFixed(0)+'%':'')+'</span></div></div><div class="g-card d-card '+(gR>0?'err-c':'ok-c')+'">'+U.gauge(rp,U.fmt(gR),'متبقي',gR>0?'var(--err)':'var(--ok)')+'<div class="d-info"><span class="d-label">إجمالي المتبقي</span><span class="d-val" style="color:'+(gR>0?'var(--err)':'var(--ok)')+'">'+U.fmt(gR)+'</span></div></div>';
+  },
+  _svc(num){
+    const d=DB.get();
+    const wa=d.water.apartments.find(a=>String(a.number)===num);
+    const ea=d.elevator.apartments.find(a=>String(a.number)===num);
+    const ma=d.maintenance.apartments.find(a=>String(a.number)===num);
+    const out=[];
+    if(wa&&wa.remaining>0.009)out.push({type:'water',id:wa.id,label:'مياه',original:wa.remaining,rounded:U.round5(wa.remaining)});
+    if(ea&&ea.remaining>0.009)out.push({type:'elevator',id:ea.id,label:'أسانسير',original:ea.remaining,rounded:U.round5(ea.remaining)});
+    if(ma&&ma.remaining>0.009)out.push({type:'maintenance',id:ma.id,label:'صيانة',original:ma.remaining,rounded:U.round5(ma.remaining)});
+    return out;
+  },
+  payModal(num){
+    const svcs=this._svc(num);
+    if(!svcs.length){U.toast('لا يوجد مستحقات على هذه الشقة','info');return}
+    const rows=svcs.map(s=>{
+      const diff=s.rounded-s.original;
+      return '<tr><td style="text-align:right;padding:8px 10px;border-bottom:1px solid var(--border)"><strong>'+s.label+'</strong></td><td style="text-align:center;padding:8px 10px;border-bottom:1px solid var(--border)">'+U.fmt(s.original)+'</td><td style="text-align:center;padding:8px 10px;border-bottom:1px solid var(--border);font-weight:800">'+U.fmt(s.rounded)+'</td><td style="text-align:center;padding:8px 10px;border-bottom:1px solid var(--border);color:'+(diff>=0?'var(--err)':'var(--ok)')+'">'+(diff>0?'+':'')+U.fmt(diff)+'</td></tr>';
+    }).join('');
+    const totOrig=svcs.reduce((s,x)=>s+x.original,0);
+    const totRound=svcs.reduce((s,x)=>s+x.rounded,0);
+    const totDiff=totRound-totOrig;
+    const body='<table style="width:100%;border-collapse:collapse;margin-bottom:14px"><thead><tr style="background:rgba(255,255,255,.03)"><th style="padding:8px 10px;font-size:.75rem">البند</th><th style="padding:8px 10px;font-size:.75rem">المستحق الأصلي</th><th style="padding:8px 10px;font-size:.75rem">المقرب لأقرب 5</th><th style="padding:8px 10px;font-size:.75rem">فرق التقريب</th></tr></thead><tbody>'+rows+'</tbody><tfoot><tr style="background:rgba(255,255,255,.03);font-weight:800"><td style="padding:8px 10px">الإجمالي</td><td style="text-align:center;padding:8px 10px">'+U.fmt(totOrig)+'</td><td style="text-align:center;padding:8px 10px">'+U.fmt(totRound)+'</td><td style="text-align:center;padding:8px 10px;color:'+(totDiff>=0?'var(--err)':'var(--ok)')+'">'+(totDiff>0?'+':'')+U.fmt(totDiff)+'</td></tr></tfoot></table><p style="font-size:.78rem;color:var(--muted)">سيتم توزيع الدفعة على كل بند بمبلغه المقرب.</p>';
+    App.mo('دفعة — شقة '+num,body,'<button class="btn btn-p" onclick="Comb.subPay(\''+num+'\')"><i class="fas fa-check"></i> تأكيد الدفع ('+U.fmt(totRound)+')</button><button class="btn" onclick="App.closeMo()">إلغاء</button>');
+  },
+  subPay(num){
+    const d=DB.get(),svcs=this._svc(num);
+    if(!svcs.length){App.closeMo();return}
+    svcs.forEach(s=>{
+      let apt;
+      if(s.type==='water'){apt=d.water.apartments.find(a=>a.id===s.id)}
+      else if(s.type==='elevator'){apt=d.elevator.apartments.find(a=>a.id===s.id)}
+      else if(s.type==='maintenance'){apt=d.maintenance.apartments.find(a=>a.id===s.id)}
+      if(!apt)return;
+      apt.paidAmount+=s.rounded;
+      apt.remaining=apt.totalDue-apt.paidAmount;
+      d.paymentsLog.push({id:U.id('pay'),type:s.type,apartmentId:s.id,apartmentNumber:num,amount:s.rounded,originalAmount:s.original,roundedAmount:s.rounded,roundingDiff:s.rounded-s.original,source:'combined',date:new Date().toISOString(),periodLabel:d.currentPeriod.label});
+    });
+    DB.save(d);App.closeMo();this.render();
+    const tot=svcs.reduce((s,x)=>s+x.rounded,0);
+    U.toast('تم تسجيل دفعة '+U.fmt(tot)+' — شقة '+num,'ok');
   }
 };
 
-/* === التقارير === */
 const Reports={
   render(){
     const d=DB.get();
@@ -1360,17 +1435,11 @@ const Settings={
     document.getElementById('s-water-apts').value=d.meta.waterAptNumbers.join(' / ');
     document.getElementById('s-elev-apts').value=d.meta.elevatorAptNumbers.join(' / ');
     document.getElementById('s-maint-apts').value=d.meta.maintenanceAptNumbers.join(' / ');
-    document.getElementById('s-sheet-url').value=d.meta.sheetUrl||'';
-    if(d.meta.sheetUrl)Sync.status('ok');else{const el=document.getElementById('sync-ind');if(el)el.innerHTML='<i class="fas fa-link-slash"></i> غير مربوط';}
+    const el=document.getElementById('sync-ind');if(el)el.innerHTML='<i class="fas fa-link"></i> مزامنة مفعلة';
     Backup.renderList();
     if(typeof PWA!=='undefined')PWA.refreshStatus();
   },
-  saveSheetUrl(){
-    const u=document.getElementById('s-sheet-url').value.trim();
-    if(!u){Sync.setUrl('');U.toast('تم إلغاء ربط جوجل شيت','info');const el=document.getElementById('sync-ind');if(el)el.innerHTML='<i class="fas fa-link-slash"></i> غير مربوط';return}
-    Sync.setUrl(u);
-    U.toast('جارِ الاتصال بجوجل شيت...','ok');
-  },
+
   save(){
     const d=DB.get();if(!d)return;
     d.meta.buildingName=document.getElementById('s-name').value.trim()||d.meta.buildingName;
@@ -1486,6 +1555,31 @@ const Snap={
   },
   modal(filename){
     this._shot(document.getElementById('mo-b'),filename||'كشف');
+  },
+  async cards(){
+    const container=document.getElementById('comb-body');
+    if(!container){U.toast('افتح صفحة الحسابات الإجمالية أولاً','warn');return}
+    const cards=container.querySelectorAll('.apt-card');
+    if(!cards.length){U.toast('لا توجد بطاقات للتصدير','warn');return}
+    if(typeof html2canvas==='undefined'){U.toast('تعذّر تحميل مكتبة التصوير','err');return}
+    U.toast('جارِ تصدير '+cards.length+' بطاقة...','info');
+    const d=DB.get(),bname=d?d.meta.buildingName:'عمارة',per=d?d.currentPeriod.label:'';
+    for(let i=0;i<cards.length;i++){
+      const c=cards[i];
+      const num=c.dataset.aptNum||String(i+1);
+      try{
+        const canvas=await html2canvas(c,{backgroundColor:this._bg(),scale:2,useCORS:true});
+        canvas.toBlob(blob=>{
+          if(!blob)return;
+          const u=URL.createObjectURL(blob),a=document.createElement('a');
+          a.href=u;a.download=(bname+'_شقة_'+num+'_'+per).replace(/[\\/:*?"<>|]+/g,'_')+'.png';
+          a.click();
+          setTimeout(()=>URL.revokeObjectURL(u),2000);
+        },'image/png');
+      }catch(e){}
+      await new Promise(r=>setTimeout(r,300));
+    }
+    U.toast('تم تصدير البطاقات','ok');
   }
 };
 
@@ -1589,7 +1683,7 @@ const App={
     if(typeof PWA!=='undefined')PWA.init();
     const d=DB.get();
     if(!d){document.getElementById('setup').classList.remove('hidden');document.getElementById('su-per').value=U.mo()}
-    else{this.renderAll();if(d.meta.sheetUrl)Sync.start()}
+    else{this.renderAll();Sync.start()}
     document.addEventListener('keydown',e=>{if(e.key==='Escape')this.closeMo();if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();this.calcCurrent()}});
   }
 };
